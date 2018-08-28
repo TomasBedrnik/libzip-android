@@ -9,7 +9,6 @@ LOCAL_MODULE := libzip
 
  
 LOCAL_CFLAGS := -DHAVE_CONFIG_H=1
-LOCAL_C_INCLUDES += $(LOCAL_PATH)/gladman-fcrypt
  
 
 

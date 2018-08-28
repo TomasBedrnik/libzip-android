@@ -1,6 +1,6 @@
 /*
-  gladman-fcrypt.h -- wrapper functions for Dr Gladman's AES functions
-  Copyright (C) 2016 Dieter Baron and Thomas Klausner
+  zip_source_get_compression_flags.c -- get compression flags for entry
+  Copyright (C) 2017 Dieter Baron and Thomas Klausner
 
   This file is part of libzip, a library to manipulate ZIP archives.
   The authors can be contacted at <libzip@nih.at>
@@ -17,7 +17,7 @@
   3. The names of the authors may not be used to endorse or promote
      products derived from this software without specific prior
      written permission.
- 
+
   THIS SOFTWARE IS PROVIDED BY THE AUTHORS ``AS IS'' AND ANY EXPRESS
   OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
   WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
@@ -31,19 +31,27 @@
   IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef HAD_GLADMAN_FCRYPT_H
-#define HAD_GLADMAN_FCRYPT_H
-
-/* implementation fetched from
- * http://173.254.28.24/~brgladma//oldsite/cryptography_technology/fileencrypt/files.zip
- *
- * Files dated 01-27-2004 except main.c dated 11-18-2008.
- */
 
 #include "zipint.h"
 
-#define INTERNAL static
+#define ZIP_COMPRESSION_BITFLAG_MAX 3
 
-#include "fileenc.h"
+zip_int8_t
+zip_source_get_compression_flags(zip_source_t *src) {
+    while (src) {
+	if ((src->supports & ZIP_SOURCE_MAKE_COMMAND_BITMASK(ZIP_SOURCE_GET_COMPRESSION_FLAGS))) {
+	    zip_int64_t ret = _zip_source_call(src, NULL, 0, ZIP_SOURCE_GET_COMPRESSION_FLAGS);
+	    if (ret < 0) {
+		return -1;
+	    }
+	    if (ret > ZIP_COMPRESSION_BITFLAG_MAX) {
+		zip_error_set(&src->error, ZIP_ER_INTERNAL, 0);
+		return -1;
+	    }
+	    return (zip_int8_t)ret;
+	}
+	src = src->src;
+    }
 
-#endif /* HAD_GLADMAN_FCRYPT_H */
+    return 0;
+}

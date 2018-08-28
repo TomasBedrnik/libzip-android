@@ -56,7 +56,7 @@
 /* #undef WORDS_BIGENDIAN */
 /* END DEFINES */
 #define PACKAGE "libzip"
-#define VERSION "1.2.0"
+#define VERSION "1.5.1"
 
 #ifndef HAVE_SSIZE_T_LIBZIP
 #  if SIZE_T_LIBZIP == INT_LIBZIP

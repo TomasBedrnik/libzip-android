@@ -8,6 +8,11 @@
    based on ../cmake-zipconf.h.in.
  */
 
+#define LIBZIP_VERSION "1.5.1"
+#define LIBZIP_VERSION_MAJOR 1
+#define LIBZIP_VERSION_MINOR 5
+#define LIBZIP_VERSION_MICRO 1
+
 #define HAVE_INTTYPES_H_LIBZIP
 #define HAVE_STDINT_H_LIBZIP
 #define HAVE_SYS_TYPES_H_LIBZIP

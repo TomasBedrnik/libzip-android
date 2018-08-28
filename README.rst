@@ -6,7 +6,7 @@ Source files added: *config.h*, *zipconfig.h*.
 
 Build files added:  *Android.mk*, *Application.mk*, and (for convenience and/or example usage) *build.sh*
 
-The 'master' branch of this repository contains version **1.2.0** of libzip.
+The 'master' branch of this repository contains version **1.5.1** of libzip. Windows specific and crypto parts of library removed. **This version is not tested on Android yet.**
 
 libzip has been written by Dieter Baron and Thomas Klausner (https://nih.at/libzip)
 
